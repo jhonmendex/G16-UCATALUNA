@@ -24,3 +24,5 @@ obtenerDatos()
   .finally(() => {
     console.log("Proceso finalizado");
   });
+
+const datos = await obtenerDatos();

@@ -8,10 +8,35 @@ function main() {
   escucharServidor();
 }
 
+const estudiantes = [
+  {
+    id: 1,
+    nombre: "Juan",
+    apellido: "perez",
+  },
+  {
+    id: 2,
+    nombre: "Maria",
+    apellido: "Lopez",
+  },
+  {
+    id: 3,
+    nombre: "Pedro",
+    apellido: "Gomez",
+  },
+  {
+    id: 4,
+    nombre: "Luis",
+    apellido: "Gonzalez",
+  },
+];
+
 function crearServidor() {
   servidor = http.createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Hola mundo");
+    console.log("url: ", req.url);
+    console.log("method: ", req.method);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(estudiantes)); //serializar en json
   });
 }
 
