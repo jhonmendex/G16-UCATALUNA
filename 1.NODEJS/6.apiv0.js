@@ -1,5 +1,5 @@
 import http from "node:http";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import url from "node:url";
 
 const uriDataBase =
@@ -49,18 +49,44 @@ function createServer(db) {
             });
           });
           break;
-        case "PUT":
-          updateUser();
-          break;
-        case "DELETE":
-          deleteUser();
-          break;
-        default:
-          break;
       }
+    } else if ((req.method = "PUT" && urlParse.pathname.includes("/user"))) {
+      const id = urlParse.pathname.split("/")[2];
+      let body = "";
+      req.on("data", (data) => {
+        body += data.toString();
+      });
+      req.on("end", () => {
+        body = JSON.parse(body); //deserializa un json
+        updateUser(db, id, body).then((resp) => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(resp));
+        });
+      });
+    } else if ((req.method = "PUT" && urlParse.pathname.includes("/user"))) {
+      const id = urlParse.pathname.split("/")[2];
+      let body = "";
+      req.on("data", (data) => {
+        body += data.toString();
+      });
+      req.on("end", () => {
+        body = JSON.parse(body); //deserializa un json
+        updateUser(db, id, body).then((resp) => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(resp));
+        });
+      });
+    } else if ((req.method = "DELETE" && urlParse.pathname.includes("/user"))) {
+      const id = urlParse.pathname.split("/")[2];
+      deleteUser(db, id).then((resp) => {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(resp));
+      });
     }
   });
 }
+
+///user/672d7a6df899f165ca59461b
 
 async function getUsers(db) {
   const collection = db.collection("user");
@@ -74,9 +100,20 @@ async function createUser(db, body) {
   return query;
 }
 
-function updateUser() {}
+async function updateUser(db, id, body) {
+  const collection = db.collection("user");
+  const query = await collection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: body }
+  );
+  return query;
+}
 
-function deleteUser() {}
+async function deleteUser(db, id) {
+  const collection = db.collection("user");
+  const query = await collection.deleteOne({ _id: new ObjectId(id) });
+  return query;
+}
 
 //escuchar el servidor
 function listenServer() {
