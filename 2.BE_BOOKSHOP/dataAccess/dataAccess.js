@@ -30,16 +30,14 @@ class DataAccess {
     return users;
   }
 
-  async findById(db) {}
-
-  async save(db, body) {
-    const collection = db.collection("user");
+  async save(collection_name, body) {
+    const collection = this.db.collection(collection_name);
     const query = await collection.insertOne(body);
     return query;
   }
 
-  async update(db, id, body) {
-    const collection = db.collection("user");
+  async update(collection_name, id, body) {
+    const collection = this.db.collection(collection_name);
     const query = await collection.updateOne(
       { _id: new ObjectId(id) },
       { $set: body }
@@ -47,11 +45,13 @@ class DataAccess {
     return query;
   }
 
-  async delete(db, id) {
-    const collection = db.collection("user");
+  async delete(collection_name, id) {
+    const collection = this.db.collection(collection_name);
     const query = await collection.deleteOne({ _id: new ObjectId(id) });
     return query;
   }
+
+  async findById(db) {}
 }
 
 export default DataAccess;

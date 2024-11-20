@@ -1,17 +1,27 @@
-const listUser = (req, res) => {
-  res.json({ mensaje: " list user" });
+import userService from "../services/userService.js";
+
+const listUser = async (req, res) => {
+  const data = await userService.listUser();
+  res.json(data);
 };
 
-const createUser = (req, res) => {
-  res.json({ mensaje: "create user" });
+const createUser = async (req, res) => {
+  const body = req.body;
+  const data = await userService.createUser(body);
+  res.json(data);
 };
 
-const updateUser = (req, res) => {
-  res.json({ mensaje: "update user" });
+const updateUser = async (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  const data = await userService.updateUser(id, body);
+  res.json(data);
 };
 
-const deleteUser = (req, res) => {
-  res.json({ mensaje: "delete user" });
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  const data = await userService.deleteUser(id);
+  res.json(data);
 };
 
 export default { listUser, createUser, updateUser, deleteUser };
