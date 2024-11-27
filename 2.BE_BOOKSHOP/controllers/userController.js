@@ -5,6 +5,12 @@ const listUser = async (req, res) => {
   res.json(data);
 };
 
+const loginUser = async (req, res) => {
+  const body = req.body;
+  const data = await userService.loginUser(body);
+  res.json(data);
+};
+
 const createUser = async (req, res) => {
   const body = req.body;
   const data = await userService.createUser(body);
@@ -24,4 +30,4 @@ const deleteUser = async (req, res) => {
   res.json(data);
 };
 
-export default { listUser, createUser, updateUser, deleteUser };
+export default { listUser, createUser, updateUser, deleteUser, loginUser };

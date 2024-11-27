@@ -51,6 +51,12 @@ class DataAccess {
     return query;
   }
 
+  async findByField(collection_name, field, value) {
+    const collection = this.db.collection(collection_name);
+    const query = await collection.findOne({ [field]: value });
+    return query;
+  }
+
   async findById(db) {}
 }
 
