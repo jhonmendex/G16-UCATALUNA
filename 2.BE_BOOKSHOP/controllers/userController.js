@@ -1,6 +1,8 @@
 import userService from "../services/userService.js";
+import jwt from "jsonwebtoken";
 
 const listUser = async (req, res) => {
+  //validar la cookie
   const data = await userService.listUser();
   res.json(data);
 };
@@ -8,7 +10,14 @@ const listUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const body = req.body;
   const data = await userService.loginUser(body);
-  res.json(data);
+  res
+    .cookie("access_token", data, {
+      httpOnly: false,
+      secure: false,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+    })
+    .send({ message: "success" });
 };
 
 const createUser = async (req, res) => {

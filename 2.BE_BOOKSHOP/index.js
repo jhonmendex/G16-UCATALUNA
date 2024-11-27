@@ -4,10 +4,13 @@ import userRoutes from "./routes/v1/userRoutes.js";
 import bookRoutes from "./routes/v1/bookRoutes.js";
 import authorRoutes from "./routes/v1/authorRoutes.js";
 import editorialRoutes from "./routes/v1/editorialRoutes.js";
+import cookieParser from "cookie-parser";
 //crear servidor
 const app = express();
 dotenv.config();
 //midleware formato json
+//verificar cookies
+app.use(cookieParser());
 //routing
 app.use(json());
 app.use("/api/v1/user", userRoutes);

@@ -1,5 +1,6 @@
 import DataAccess from "../dataAccess/dataAccess.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 const dataAccess = new DataAccess();
 const COLLECTION = "user";
 (async () => {
@@ -15,7 +16,14 @@ const loginUser = async (body) => {
   } else {
     const validatePass = await comparePassword(password, data.password);
     if (validatePass) {
-      response = { message: "Usuario logueado" };
+      const user = {
+        email: data.email,
+        password: "",
+      };
+      const token = jwt.sign({ user }, process.env.SECRET_KEY, {
+        expiresIn: "1h",
+      });
+      response = { message: "Usuario logueado", token: token };
     } else {
       response = { message: "Contraseña incorrecta" };
     }
