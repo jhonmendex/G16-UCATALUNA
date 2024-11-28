@@ -1,8 +1,21 @@
 import authorService from "../services/authorService.js";
+import jwt from "jsonwebtoken";
 
 const listAuthor = async (req, res) => {
-  const data = await authorService.listAuthor();
-  res.json(data);
+  const cookie = req.cookies["access_token"];
+
+  if (!cookie) {
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+
+  try {
+    const authorization = jwt.verify(cookie.token, process.env.SECRET_KEY);
+    if (!authorization) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+    const data = await authorService.listAuthor();
+    res.status(200).json(data);
+  } catch (error) {}
 };
 
 const createAuthor = async (req, res) => {
