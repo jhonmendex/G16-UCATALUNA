@@ -14,6 +14,18 @@ export default function Menu() {
           <li>
             <Link to="/mui">Material UI</Link>
           </li>
+          <li>
+            <Link to="/props">Props</Link>
+          </li>
+          <li>
+            <Link to="/children">Children</Link>
+          </li>
+          <li>
+            <Link to="/lista">Listas</Link>
+          </li>
+          <li>
+            <Link to="/rencon">Renderizado condicional</Link>
+          </li>
         </ul>
       </nav>
     </>

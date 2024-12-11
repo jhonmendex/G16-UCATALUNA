@@ -4,7 +4,12 @@ import Tabla from  "./components/2.CompFuncion/Tabla.jsx"
 import { BrowserRouter,Routes, Route } from 'react-router'
 import Menu from  "./components/3.Router/Menu.jsx"
 import Boton from "./components/4.MUI/Boton.jsx"
+import ListaLibros from "./components/5.props/ListaLibros.tsx"
+import EjemploAlerta from "./components/6.children/EjemploAlerta.jsx"
+import Lista from "./components/7.listas/Lista.jsx"
+import RenCon from "./components/8.RenderizadoCondicional/RenCon.jsx"
 function App() {
+  const sesion = true
 
   return (
     <>
@@ -27,6 +32,10 @@ function App() {
               </>
             } />
             <Route path="/mui" element={<Boton/>} />
+            <Route path="/props" element={<ListaLibros/>} />
+            <Route path="/children" element={<EjemploAlerta/>} />
+            <Route path="/lista" element={<Lista/>} />
+            <Route path="/rencon" element={<RenCon sesion={sesion}/>} />
           </Routes>
      </BrowserRouter>
      
