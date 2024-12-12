@@ -8,6 +8,9 @@ import ListaLibros from "./components/5.props/ListaLibros.tsx"
 import EjemploAlerta from "./components/6.children/EjemploAlerta.jsx"
 import Lista from "./components/7.listas/Lista.jsx"
 import RenCon from "./components/8.RenderizadoCondicional/RenCon.jsx"
+import Eventos from "./components/9.Eventos/Eventos.tsx"
+import Contador from "./components/10.Estados/Contador.jsx"
+import ContadorHooks from "./components/11.Hooks/ContadorHook.jsx"
 function App() {
   const sesion = true
 
@@ -36,6 +39,9 @@ function App() {
             <Route path="/children" element={<EjemploAlerta/>} />
             <Route path="/lista" element={<Lista/>} />
             <Route path="/rencon" element={<RenCon sesion={sesion}/>} />
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/estados" element={<Contador />} />
+            <Route path="/hooks" element={<ContadorHooks />} />
           </Routes>
      </BrowserRouter>
      

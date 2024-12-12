@@ -26,6 +26,15 @@ export default function Menu() {
           <li>
             <Link to="/rencon">Renderizado condicional</Link>
           </li>
+          <li>
+            <Link to="/eventos">Eventos</Link>
+          </li>
+          <li>
+            <Link to="/estados">Estados</Link>
+          </li>
+          <li>
+            <Link to="/hooks">Hooks</Link>
+          </li>
         </ul>
       </nav>
     </>
