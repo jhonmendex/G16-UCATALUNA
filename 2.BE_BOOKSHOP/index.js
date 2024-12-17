@@ -5,12 +5,22 @@ import bookRoutes from "./routes/v1/bookRoutes.js";
 import authorRoutes from "./routes/v1/authorRoutes.js";
 import editorialRoutes from "./routes/v1/editorialRoutes.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 //crear servidor
 const app = express();
 dotenv.config();
+
 //midleware formato json
 //verificar cookies
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "*", // Permite solicitudes solo desde http://example.com
+    methods: "GET,POST,PUT,DELETE", // Métodos HTTP permitidos
+    allowedHeaders: "Content-Type,Authorization", // Encabezados permitidos
+    credentials: true, // Permite el envío de cookies y encabezados de autenticación
+  })
+);
 //routing
 app.use(json());
 app.use("/api/v1/user", userRoutes);

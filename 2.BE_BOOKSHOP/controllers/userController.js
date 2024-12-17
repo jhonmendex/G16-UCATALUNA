@@ -17,7 +17,7 @@ const loginUser = async (req, res) => {
       sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     })
-    .send({ message: "success" });
+    .send(data);
 };
 
 const createUser = async (req, res) => {

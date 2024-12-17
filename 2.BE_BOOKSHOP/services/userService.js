@@ -23,7 +23,7 @@ const loginUser = async (body) => {
       const token = jwt.sign({ user }, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
-      response = { message: "Usuario logueado", token: token };
+      response = { message: "success", token: token };
     } else {
       response = { message: "Contraseña incorrecta" };
     }
